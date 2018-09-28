@@ -25,3 +25,8 @@ def test_yikes(capsys):
     out, err = capsys.readouterr()
     assert out == ''
     assert 'Out of coffee!' in err
+
+def test_capsys_disabled(capsys):
+    with capsys.disabled():
+        print('\nalways print this')
+    print('normal print, usually captured')
