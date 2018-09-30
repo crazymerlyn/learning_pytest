@@ -38,3 +38,12 @@ def test_not_nice_verbose(sample_test):
         '*::test_fail FAILED*',
     ])
     assert result.ret == 1
+
+def test_header_nice(sample_test):
+    result = sample_test.runpytest('--nice')
+    result.stdout.fnmatch_lines(['Thanks for running the tests.',])
+
+def test_header_not_nice(sample_test):
+    result = sample_test.runpytest()
+    thanks_message = 'Thanks for running the tests.'
+    assert thanks_message not in result.stdout.str()
