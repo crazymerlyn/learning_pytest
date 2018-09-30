@@ -25,6 +25,15 @@ def test_with_nice(sample_test):
     result.stdout.fnmatch_lines(['*.O*',])
     assert result.ret == 1
 
+def test_with_nice_ini(sample_test):
+    sample_test.makeini("""
+    [pytest]
+    nice = True
+    """)
+    result = sample_test.runpytest()
+    result.stdout.fnmatch_lines(['*.O*',])
+    assert result.ret == 1
+
 def test_with_nice_verbose(sample_test):
     result = sample_test.runpytest('--nice', '-v')
     result.stdout.fnmatch_lines([
