@@ -11,6 +11,11 @@ class TestAdd:
         with pytest.raises(ValueError):
             tasks.add(Task(owner='bob'))
 
+    def test_done_not_bool(self):
+        """Raises an exception if done is not a bool."""
+        with pytest.raises(ValueError):
+            tasks.add(Task(summary='summary', done='True'))
+
 def test_add_raises():
     """add() raises an exception with wrong type param."""
     with pytest.raises(TypeError):
