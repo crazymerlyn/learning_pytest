@@ -1,5 +1,15 @@
 import pytest
 import tasks
+from tasks import Task
+
+@pytest.mark.usefixtures('tasks_db')
+class TestAdd:
+    """Tests related to tasks.add()."""
+
+    def test_missing_summary(self):
+        """Raises an exception if summary is missing."""
+        with pytest.raises(ValueError):
+            tasks.add(Task(owner='bob'))
 
 def test_add_raises():
     """add() raises an exception with wrong type param."""
