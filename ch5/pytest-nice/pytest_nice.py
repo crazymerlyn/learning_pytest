@@ -11,11 +11,12 @@ def pytest_addoption(parser):
 
 def pytest_report_header():
     """Thank tester for running tests."""
-    if pytest.config.getoption('nice'):
+    if pytest.config.getoption('nice') or pytest.config.getini('nice'):
         return "Thanks for running the tests."
 
 def pytest_report_teststatus(report):
     """Turn failures into opportunities."""
     if report.when == 'call':
-        if report.failed and pytest.config.getoption('nice'):
+        nice = (pytest.config.getoption('nice') or pytest.config.getini('nice'))
+        if report.failed and nice:
             return (report.outcome, 'O', 'OPPORTUNITY for improvement')
