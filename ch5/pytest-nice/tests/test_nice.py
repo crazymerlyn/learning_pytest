@@ -19,3 +19,22 @@ def test_pass_fail(sample_test):
     ])
 
     assert res.ret == 1
+
+def test_with_nice(sample_test):
+    result = sample_test.runpytest('--nice')
+    result.stdout.fnmatch_lines(['*.O*',])
+    assert result.ret == 1
+
+def test_with_nice_verbose(sample_test):
+    result = sample_test.runpytest('--nice', '-v')
+    result.stdout.fnmatch_lines([
+        '*::test_fail OPPORTUNITY for improvement*',
+    ])
+    assert result.ret == 1
+
+def test_not_nice_verbose(sample_test):
+    result = sample_test.runpytest('-v')
+    result.stdout.fnmatch_lines([
+        '*::test_fail FAILED*',
+    ])
+    assert result.ret == 1
