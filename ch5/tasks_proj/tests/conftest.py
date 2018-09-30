@@ -2,6 +2,15 @@ import pytest
 import tasks
 from tasks import Task
 
+def pytest_report_header():
+    """Thank tester for running tests."""
+    return "Thanks for running the tests."""
+
+def pytest_report_teststatus(report):
+    """Turn failures into opportunities."""
+    if report.when == 'call' and report.failed:
+        return (report.outcome, 'O', 'OPPORTUNITY for improvement')
+
 @pytest.fixture(scope='session')
 def tasks_db_session(tmpdir_factory):
     """Connect to db before tests, disconnect after."""
