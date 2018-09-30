@@ -11,7 +11,7 @@ Here's how you use multiply:
 
 Here's how you use divide:
 >>> um.divide(10, 5)
-2.0
+2
 """
 
 def multiply(a, b):
@@ -30,6 +30,6 @@ def divide(a, b):
     Returns a divided by b.
 
     >>> um.divide(10, 5)
-    2.0
+    2
     """
     return a / b
